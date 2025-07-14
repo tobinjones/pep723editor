@@ -75,3 +75,11 @@ before-build-python = ["jlpm clean:all"]
 
 [tool.check-wheel-contents]
 ignore = ["W002"]
+
+[dependency-groups]
+dev = [
+    "build>=1.2.2.post1",
+    "hatch>=1.14.1",
+    "jupyter>=1.1.1",
+    "twine>=6.1.0",
+]
