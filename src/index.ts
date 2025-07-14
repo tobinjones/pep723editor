@@ -3,29 +3,43 @@ import {
   JupyterFrontEndPlugin
 } from '@jupyterlab/application';
 
-import { ISettingRegistry } from '@jupyterlab/settingregistry';
+import { IDocumentWidget, DocumentWidget, ABCWidgetFactory, DocumentRegistry } from '@jupyterlab/docregistry';
+import { INotebookModel } from '@jupyterlab/notebook';
+import { Widget } from '@lumino/widgets';
 
-/**
- * Initialization data for the pep723editor extension.
- */
+class CustomNotebookViewer extends Widget {
+  constructor(context: DocumentRegistry.IContext<INotebookModel>) {
+    super();
+    this.addClass('custom-notebook-viewer');
+    this.node.innerHTML = '<div style="padding: 20px; font-size: 24px; text-align: center;">Hello World</div>';
+  }
+}
+
+class CustomNotebookViewerFactory extends ABCWidgetFactory<
+  IDocumentWidget<CustomNotebookViewer>,
+  INotebookModel
+> {
+  protected createNewWidget(context: DocumentRegistry.IContext<INotebookModel>): IDocumentWidget<CustomNotebookViewer> {
+    const content = new CustomNotebookViewer(context);
+    return new DocumentWidget({ content, context });
+  }
+}
+
 const plugin: JupyterFrontEndPlugin<void> = {
   id: 'pep723editor:plugin',
-  description: 'A JupyterLab extension to edit PEP723 inline script metadata in notebooks.',
+  description: 'A custom notebook viewer extension.',
   autoStart: true,
-  optional: [ISettingRegistry],
-  activate: (app: JupyterFrontEnd, settingRegistry: ISettingRegistry | null) => {
+  activate: (app: JupyterFrontEnd) => {
     console.log('JupyterLab extension pep723editor is activated!');
 
-    if (settingRegistry) {
-      settingRegistry
-        .load(plugin.id)
-        .then(settings => {
-          console.log('pep723editor settings loaded:', settings.composite);
-        })
-        .catch(reason => {
-          console.error('Failed to load settings for pep723editor.', reason);
-        });
-    }
+    const factory = new CustomNotebookViewerFactory({
+      name: 'Custom Notebook Viewer',
+      fileTypes: ['notebook'],
+      defaultFor: [],
+      modelName: 'notebook'
+    });
+
+    app.docRegistry.addWidgetFactory(factory);
   }
 };
 

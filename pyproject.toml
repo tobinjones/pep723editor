@@ -23,8 +23,12 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
+    "jupyter-server>=2.0.0",
 ]
 dynamic = ["version", "description", "authors", "urls", "keywords"]
+
+[project.entry-points."jupyter_server.extension.enabled"]
+pep723editor = "pep723editor.extension:Pep723EditorExtension"
 
 [tool.hatch.version]
 source = "nodejs"

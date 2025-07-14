@@ -1439,6 +1439,9 @@ wheels = [
 [[package]]
 name = "pep723editor"
 source = { editable = "." }
+dependencies = [
+    { name = "jupyter-server" },
+]
 
 [package.dev-dependencies]
 dev = [
@@ -1449,6 +1452,7 @@ dev = [
 ]
 
 [package.metadata]
+requires-dist = [{ name = "jupyter-server", specifier = ">=2.0.0" }]
 
 [package.metadata.requires-dev]
 dev = [

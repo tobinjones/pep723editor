@@ -30,29 +30,29 @@ The correct approach for creating alternate notebook viewers uses:
 
 ### Initial Setup (One Time)
 ```bash
-# Install in development mode
-pip install -e "."
+# Install python dependencies with uv
+uv sync
 
 # Install JavaScript dependencies
-jlpm install
+uv run jlpm install
 ```
 
 ### Development Cycle
 ```bash
 # Terminal 1: Watch for changes
-jlpm run watch
+uv run jupyterlab jlpm run watch
 
 # Terminal 2: Run JupyterLab
-jupyter lab
+uv run jupyter-lab
 ```
 
 ### Building for Production
 ```bash
 # Build the extension
-jlpm run build
+uv run jlpm run build
 
 # Build Python package
-python -m build
+uv run python -m build
 ```
 
 ## Project Structure
@@ -114,16 +114,6 @@ Several production extensions demonstrate this pattern:
 - **nbdime**: Creates diff viewers for notebooks
 - **jupyterlab-git**: Provides Git integration with custom diff views
 - Both use DocumentWidget + NotebookModel architecture
-
-## Testing
-
-```bash
-# Run tests
-jlpm run test
-
-# Run tests in watch mode
-jlpm run test:watch
-```
 
 ## Packaging and Distribution
 

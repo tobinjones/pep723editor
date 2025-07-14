@@ -14,3 +14,13 @@ def _jupyter_labextension_paths():
         "src": "labextension",
         "dest": "pep723editor"
     }]
+
+
+def _jupyter_server_extension_points():
+    """Return the extension points for jupyter_server."""
+    return [
+        {
+            "module": "pep723editor.extension",
+            "app": "Pep723EditorExtension",
+        }
+    ]
