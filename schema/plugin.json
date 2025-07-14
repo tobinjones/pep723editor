@@ -1,0 +1,8 @@
+{
+  "jupyter.lab.shortcuts": [],
+  "title": "pep723editor",
+  "description": "pep723editor settings.",
+  "type": "object",
+  "properties": {},
+  "additionalProperties": false
+}

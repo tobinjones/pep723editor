@@ -1,0 +1,15 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v4.3.8
+_src_path: https://github.com/jupyterlab/extension-template
+author_email: tobin@davisjones.nz
+author_name: Tobin Davis-Jones
+has_binder: false
+has_settings: true
+kind: frontend
+labextension_name: pep723editor
+project_short_description: A JupyterLab extension to edit PEP723 inline script metadata
+    in notebooks.
+python_name: pep723editor
+repository: https://github.com/tobinjones/pep723editor
+test: false
+
